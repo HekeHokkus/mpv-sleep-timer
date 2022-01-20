@@ -2,7 +2,7 @@ local sleepAfter = 0
 local startSleep = nil
 
 function sleep()
-    if sleepAfter = 0 then
+    if sleepAfter == 0 then
         mp.add_timeout(60, sleepBegin)
     end
     sleepAfter = sleepAfter + 15
