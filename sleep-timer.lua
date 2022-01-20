@@ -1,12 +1,21 @@
 local sleepAfter = 0
 local startSleep = nil
+local increment = 15
 
 function sleep()
     if sleepAfter == 0 then
         mp.add_timeout(60, sleepBegin)
+        sleepAfter = sleepAfter + increment
+        mp.osd_message("Sleep in "..sleepAfter.." minutes")
+    elseif sleepAfter // increment == sleepAfter / increment then
+        sleepAfter = sleepAfter + increment
+        mp.osd_message("Sleep in "..sleepAfter.." minutes")
+    elseif sleepAfter // increment < sleepAfter / increment then
+        startSleep:kill()
+        startSleep = nil
+        sleepAfter = 0
+        mp.osd_message("Sleep cancelled")
     end
-    sleepAfter = sleepAfter + 15
-    mp.osd_message("Sleep in "..sleepAfter.." minutes")
 end
 
 function sleepBegin()
