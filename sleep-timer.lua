@@ -14,4 +14,4 @@ function sleepPause()
     sleepAfter = 0
 end
 
-mp.add_key_binding("F3", "sleep-timer", sleep)
+mp.add_key_binding("Ctrl+SPACE", "sleep-timer", sleep)
