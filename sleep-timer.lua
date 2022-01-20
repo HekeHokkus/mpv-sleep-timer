@@ -7,10 +7,10 @@ function sleep()
         mp.add_timeout(60, sleepBegin)
         sleepAfter = sleepAfter + increment
         mp.osd_message("Sleep in "..sleepAfter.." minutes")
-    elseif sleepAfter // increment == sleepAfter / increment then
+    elseif (sleepAfter // increment) == (sleepAfter / increment) then
         sleepAfter = sleepAfter + increment
         mp.osd_message("Sleep in "..sleepAfter.." minutes")
-    elseif sleepAfter // increment < sleepAfter / increment then
+    elseif (sleepAfter // increment) < (sleepAfter / increment) then
         startSleep:kill()
         startSleep = nil
         sleepAfter = 0
