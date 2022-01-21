@@ -10,7 +10,7 @@ local sleepAfter = o.minimum - o.increment
 local startSleep = nil
 
 function sleep()
-    if (sleepAfter == o.minimum) then
+    if (sleepAfter == o.minimum - o.increment) then
         mp.add_timeout(60, sleepBegin)
         sleepAfter = (sleepAfter + o.increment)
         mp.osd_message("Sleep in "..sleepAfter.." minutes")
