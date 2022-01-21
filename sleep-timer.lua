@@ -14,12 +14,12 @@ function sleep()
         mp.add_timeout(60, sleepBegin)
         sleepAfter = (sleepAfter + o.increment)
         mp.osd_message("Sleep in "..sleepAfter.." minutes")
-    elseif (math.floor(sleepAfter / o.increment) < sleepAfter / o.increment) then
+    elseif (math.floor(sleepAfter / o.increment) < sleepAfter / o.increment) or sleepAfter == o.maximum then
         startSleep:kill()
         startSleep = nil
         sleepAfter = o.minimum - o.increment
         mp.osd_message("Sleep cancelled")
-    elseif (math.floor(sleepAfter / o.increment) == sleepAfter / o.increment) then
+    elseif (math.floor(sleepAfter / o.increment) == sleepAfter / o.increment) and sleepAfter < o.maximum then
         sleepAfter = (sleepAfter + o.increment)
         mp.osd_message("Sleep in "..sleepAfter.." minutes")
     end
