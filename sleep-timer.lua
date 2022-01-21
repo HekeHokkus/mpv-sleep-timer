@@ -4,10 +4,10 @@ local o = {
     maximum = 150
 }
 
+options.read_options(o)
+
 local sleepAfter = o.minimum - o.increment
 local startSleep = nil
-
-options.read_options(o)
 
 function sleep()
     if (sleepAfter == o.minimum) then
