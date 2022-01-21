@@ -1,3 +1,5 @@
+local options = require "mp.options"
+
 local o = {
     increment = 15
     minimum = 15
