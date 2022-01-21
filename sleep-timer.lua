@@ -1,19 +1,26 @@
-local sleepAfter = 0
+local o = {
+    increment = 15
+    minimum = 15
+    maximum = 150
+}
+
+local sleepAfter = o.minimum - o.increment
 local startSleep = nil
-local increment = 15
+
+options.read_options(o)
 
 function sleep()
-    if (sleepAfter == 0) then
+    if (sleepAfter == o.minimum) then
         mp.add_timeout(60, sleepBegin)
-        sleepAfter = (sleepAfter + increment)
+        sleepAfter = (sleepAfter + o.increment)
         mp.osd_message("Sleep in "..sleepAfter.." minutes")
-    elseif (math.floor(sleepAfter / increment) == sleepAfter / increment) then
-        sleepAfter = (sleepAfter + increment)
+    elseif (math.floor(sleepAfter / o.increment) == sleepAfter / o.increment) then
+        sleepAfter = (sleepAfter + o.increment)
         mp.osd_message("Sleep in "..sleepAfter.." minutes")
-    elseif (math.floor(sleepAfter / increment) < sleepAfter / increment) then
+    elseif (math.floor(sleepAfter / o.increment) < sleepAfter / o.increment) then
         startSleep:kill()
         startSleep = nil
-        sleepAfter = 0
+        sleepAfter = o.minimum - o.increment
         mp.osd_message("Sleep cancelled")
     end
 end
@@ -27,7 +34,7 @@ function sleepPause()
     mp.set_property_native("pause", true)
     startSleep:kill()
     startSleep = nil
-    sleepAfter = 0
+    sleepAfter = o.minimum - o.increment
 end
 
 mp.add_key_binding("Ctrl+SPACE", "sleep-timer", sleep)
