@@ -10,15 +10,21 @@ options.read_options(o)
 
 local sleepAfter = o.minimum - o.increment
 local startSleep = nil
+local timeout = nil
 
 function sleep()
     if (sleepAfter == o.minimum - o.increment) then
-        mp.add_timeout(60, sleepBegin)
+        timeout = mp.add_timeout(60, sleepBegin)
         sleepAfter = (sleepAfter + o.increment)
         mp.osd_message("Sleep in "..sleepAfter.." minutes")
-    elseif (math.floor(sleepAfter / o.increment) < sleepAfter / o.increment) or (sleepAfter >= o.maximum) then
+    elseif (math.floor(sleepAfter / o.increment) < sleepAfter / o.increment) then
         startSleep:kill()
         startSleep = nil
+        sleepAfter = o.minimum - o.increment
+        mp.osd_message("Sleep cancelled")
+    elseif (sleepAfter >= o.maximum) then
+        timeout:kill()
+        timeout = nil
         sleepAfter = o.minimum - o.increment
         mp.osd_message("Sleep cancelled")
     elseif (math.floor(sleepAfter / o.increment) == sleepAfter / o.increment) and (sleepAfter < o.maximum) then
