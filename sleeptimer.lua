@@ -6,7 +6,7 @@ local o = {
     maximum = 150
 }
 
-options.read_options(o, "sleep-timer")
+options.read_options(o, "sleeptimer")
 
 local sleepAfter = o.minimum - o.increment
 local startSleep = nil
