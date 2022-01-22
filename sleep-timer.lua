@@ -34,6 +34,8 @@ function sleep()
 end
 
 function sleepBegin()
+    timeout: kill()
+    timeout = nil
     sleepAfter = sleepAfter - 1
     startSleep = mp.add_timeout(sleepAfter * 60, sleepPause)
 end
