@@ -9,7 +9,7 @@ local o = {
 
 options.read_options(o, "sleeptimer")
 
-If o.episodes == true then
+if o.episodes == true then
     o.increment = 1
     o.minimum = 1
     o.maximum = 5
