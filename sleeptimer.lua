@@ -16,11 +16,6 @@ If o.episodes == true then
     options.read_options(o, "sleeptimer")
 end
 
-local sleepAfter = o.minimum - o.increment
-local startSleep = nil
-local timeout = nil
-local timeron = false
-
 if o.increment < 1 then
     o.increment = 1
 end
@@ -32,6 +27,11 @@ end
 if o.maximum < o.minimum then
     o.maximum = o.minimum
 end
+
+local sleepAfter = o.minimum - o.increment
+local startSleep = nil
+local timeout = nil
+local timeron = false
 
 function sleep()
     if (sleepAfter == o.minimum - o.increment) then
