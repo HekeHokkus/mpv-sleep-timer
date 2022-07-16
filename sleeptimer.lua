@@ -9,13 +9,6 @@ local o = {
 
 options.read_options(o, "sleeptimer")
 
-if o.episodes == true then
-    o.increment = 1
-    o.minimum = 1
-    o.maximum = 5
-    options.read_options(o, "sleeptimer")
-end
-
 if o.increment < 1 then
     o.increment = 1
 end
@@ -105,9 +98,13 @@ function episodeBegin()
     timeron = true
 end
 
-if o.episodes == true then
-    mp.register_event("file-loaded", episodeCount)
-    mp.add_key_binding("Ctrl+SPACE", "sleep-timer", sleepEpisode)
-else
-    mp.add_key_binding("Ctrl+SPACE", "sleep-timer", sleep)
+function inputsel()
+    if o.episodes == true then
+        mp.register_event("file-loaded", episodeCount)
+        sleepEpisode
+    else
+        sleep
+    end
 end
+
+mp.add_key_binding("Ctrl+SPACE", "sleep-timer", inputsel)
